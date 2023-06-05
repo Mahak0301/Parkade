@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/normal_nav_graph"
+    app:startDestination="@id/dashboardNormal">
+
+    <fragment
+        android:id="@+id/dashboardNormal"
+        android:name="com.example.project.DashboardNormal"
+        android:label="DashboardNormal"
+        tools:layout="@layout/fragment_dashboard_normal"/>
+    <fragment
+        android:id="@+id/scan"
+        android:name="com.example.project.Scan"
+        android:label="Scan"
+        tools:layout="@layout/fragment_scan"/>
+    <fragment
+        android:id="@+id/profile2"
+        android:name="com.example.project.Profile"
+        android:label="Profile"
+        tools:layout="@layout/fragment_profile"/>
+</navigation>

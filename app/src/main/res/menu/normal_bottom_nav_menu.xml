@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/dashboardNormal"
+        android:icon="@drawable/ic_baseline_dashboard_24"
+        android:title="@string/title_dashboard_fragment"
+        />
+
+    <item
+        android:id="@+id/scan"
+        android:icon="@drawable/ic_baseline_image_search_24"
+        android:title="@string/title_scan_fragment" />
+
+    <item
+        android:id="@+id/profile2"
+        android:icon="@drawable/ic_baseline_account_circle_24"
+        android:title="@string/title_profile_fragment" />
+
+</menu>
