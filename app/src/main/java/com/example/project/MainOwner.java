@@ -35,7 +35,7 @@ public class MainOwner extends AppCompatActivity {
 
     AppConstants globalClass;
     Boolean dialogshown=false;
-    Button addPosition;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,7 +46,7 @@ public class MainOwner extends AppCompatActivity {
     }
     private void initComponents() {
         globalClass=(AppConstants)getApplicationContext();
-        addPosition=findViewById(R.id.button);
+
         db=FirebaseDatabase.getInstance();
         auth=FirebaseAuth.getInstance();
     }
