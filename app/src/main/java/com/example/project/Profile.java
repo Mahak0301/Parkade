@@ -19,9 +19,12 @@ public class Profile extends Fragment {
 
     LinearLayout personalDetailsBtn,changePasswordBtn,aboutMeBtn,logoutBtn,upiDetailsBtn;
     TextView nameText;
+    UserDetails userObj;
 
     FirebaseAuth auth;
     BasicUtils utils=new BasicUtils();
+    AppConstants globalClass;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -38,13 +41,15 @@ public class Profile extends Fragment {
     }
 
     private void initComponents(View root) {
-
+        globalClass=(AppConstants)getActivity().getApplicationContext();
+        userObj=globalClass.getUserObj();
         logoutBtn = root.findViewById(R.id.logoutBtn);
         nameText = root.findViewById(R.id.nameText);
         personalDetailsBtn = root.findViewById(R.id.personalDetailsBtn);
         changePasswordBtn = root.findViewById(R.id.changePasswordBtn);
         aboutMeBtn = root.findViewById(R.id.aboutMeBtn);
         upiDetailsBtn = root.findViewById(R.id.upiDetailsBtn);
+        nameText.setText(userObj.name);
 
     }
 
