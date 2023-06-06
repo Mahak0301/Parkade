@@ -13,10 +13,10 @@
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.068">
+        app:layout_constraintVertical_bias="0.0">
 
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -34,17 +34,15 @@
                 android:id="@+id/textView16"
                 android:layout_width="150dp"
                 android:layout_height="38dp"
-                android:text="About USA"
+                android:layout_marginTop="48dp"
+                android:text="About Us"
                 android:textColor="#6C6969"
                 android:textSize="20sp"
                 android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintHorizontal_bias="0.568"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="1.0" />
-
+                app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.motion.widget.MotionLayout
@@ -87,25 +85,27 @@
                 app:layout_constraintVertical_bias="0.29" />
 
         </androidx.constraintlayout.motion.widget.MotionLayout>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <TextView
         android:id="@+id/textView11"
-        android:layout_width="408dp"
+        android:layout_width="413dp"
         android:layout_height="53dp"
         android:layout_marginTop="124dp"
         android:gravity="center"
         android:text="Our Team"
+        android:textAlignment="gravity"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         android:textColor="@color/grey_90"
         android:textSize="20sp"
         app:fontFamily="sans-serif-medium"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.376" />
 
     <LinearLayout
         android:id="@+id/linearLayout5"
@@ -125,7 +125,8 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Akshat Khandelwal"
-            android:textSize="16sp" />
+            android:textSize="16sp"
+            android:textStyle="bold" />
     </LinearLayout>
 
     <LinearLayout
@@ -146,21 +147,22 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Avni Saini"
-            android:textSize="16sp" />
+            android:textSize="16sp"
+            android:textStyle="bold" />
     </LinearLayout>
 
     <LinearLayout
         android:id="@+id/linearLayout7"
-        android:layout_width="155dp"
-        android:layout_height="137dp"
+        android:layout_width="157dp"
+        android:layout_height="116dp"
         android:layout_marginEnd="12dp"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.963"
+        app:layout_constraintHorizontal_bias="0.971"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/linearLayout5"
-        app:layout_constraintVertical_bias="0.839">
+        app:layout_constraintVertical_bias="1.0">
 
         <TextView
             android:id="@+id/textView25"
@@ -168,21 +170,22 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Kush Sharma"
-            android:textSize="16sp" />
+            android:textSize="16sp"
+            android:textStyle="bold" />
     </LinearLayout>
 
     <LinearLayout
 
         android:id="@+id/linearLayout8"
-        android:layout_width="158dp"
-        android:layout_height="140dp"
+        android:layout_width="160dp"
+        android:layout_height="116dp"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/linearLayout7"
-        app:layout_constraintHorizontal_bias="0.506"
+        app:layout_constraintHorizontal_bias="0.493"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView11"
-        app:layout_constraintVertical_bias="0.837">
+        app:layout_constraintVertical_bias="1.0">
 
         <TextView
             android:id="@+id/textView24"
@@ -190,7 +193,19 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Mahak Jain"
-            android:textSize="16sp" />
+            android:textSize="16sp"
+            android:textStyle="bold" />
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="360dp"
+        android:layout_height="217dp"
+        android:layout_marginTop="193dp"
+        android:text="Parking has become an expensive resource in almost any major cities in the world, and its limited availability is the concurrent cause of urban traffic congestion and air pollution. The proposed project is a smart parking booking system that provides customers an easy way of reserving a parking space online. It overcomes the problem of finding a parking space in commercial areas that unnecessary consumes time."
+        android:textSize="17sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
