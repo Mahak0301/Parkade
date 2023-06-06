@@ -38,6 +38,16 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="left"
+                    android:text="Area Name"
+                    android:textColor="#000" />
+
+                <TextView
+                    android:id="@+id/availableLabel2"
+                    style="@style/TextAppearance.AppCompat.Medium"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="left"
                     android:text="Available"
                     android:textColor="#000" />
 
@@ -149,9 +159,19 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/availableText"
+                    android:id="@+id/areaNameText"
                     style="@style/TextAppearance.AppCompat.Medium"
                     android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="left"
+                    android:text="Area"
+                    android:textColor="#000" />
+
+                <TextView
+                    android:id="@+id/availableText2"
+                    style="@style/TextAppearance.AppCompat.Medium"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="left"

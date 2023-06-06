@@ -24,7 +24,7 @@ import com.google.firebase.database.ValueEventListener;
 
 public class DashboardOwner extends Fragment {
     LinearLayout expandCard, slotStatus, slot_individual_list_view, historyBtn;
-    TextView availableText, occupiedText, price2Text, price3Text, price4Text, slotName, numberPlate;
+    TextView areaName,availableText, occupiedText, price2Text, price3Text, price4Text, slotName, numberPlate;
     SlotNoInfo slotNoInfo;
 
     BasicUtils utils = new BasicUtils();
@@ -57,7 +57,8 @@ public class DashboardOwner extends Fragment {
         db = FirebaseDatabase.getInstance();
 
         expandCard = root.findViewById(R.id.expandCard);
-        availableText = expandCard.findViewById(R.id.availableText);
+        areaName=expandCard.findViewById(R.id.areaNameText);
+        availableText = expandCard.findViewById(R.id.areaNameText);
         occupiedText = expandCard.findViewById(R.id.occupiedText);
         price2Text = expandCard.findViewById(R.id.price2Text);
         price3Text = expandCard.findViewById(R.id.price3Text);
@@ -117,6 +118,7 @@ public class DashboardOwner extends Fragment {
 
     private void setDashboardValues(ParkingArea parkingArea, LayoutInflater inflater) {
         String prepend = "Rs.";
+        areaName.setText(String.valueOf(parkingArea.name));
         availableText.setText(String.valueOf(parkingArea.availableSlots));
         occupiedText.setText(String.valueOf(parkingArea.occupiedSlots));
         price2Text.setText(prepend.concat(String.valueOf(parkingArea.amount2).concat("/Hr")));
