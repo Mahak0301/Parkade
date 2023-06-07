@@ -117,6 +117,28 @@ public class Add extends Fragment {
         addLocationBtn=root.findViewById(R.id.addLocationBtn);
         globalClass=(AppConstants)getActivity().getApplicationContext();
         userObj=globalClass.getUserObj();
+        db.getReference().child("ParkingAreas").orderByChild("userID").equalTo(auth.getCurrentUser().getUid())
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                            ParkingArea parkingArea = dataSnapshot.getValue(ParkingArea.class);
+                            String prepend = "Rs.";
+                            areaNameText.setText(String.valueOf(parkingArea.name));
+                            totalSlotsText.setText(String.valueOf(parkingArea.totalSlots));
+                            amount2Text.setText(String.valueOf(parkingArea.amount2));
+                            amount3Text.setText(String.valueOf(parkingArea.amount3));
+                            amount4Text.setText(String.valueOf(parkingArea.amount4));
+                            Log.e("DashboardOwnerFragment", "Fetch parking area");
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+                    }
+                });
+
+
     }
 
     private void attachListeners() {
@@ -125,6 +147,20 @@ public class Add extends Fragment {
             @Override
             public void onClick(View view) {
 
+                db.getReference().child("UpiInfo").child(auth.getCurrentUser().getUid()).addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        UpiInfo  upiInfo=snapshot.getValue(UpiInfo.class);
+                        if(upiInfo!=null){
+                            upiIdText.setText(String.valueOf(upiInfo.upiId));
+
+                            upiNameText.setText(String.valueOf(upiInfo.upiName));
+
+                        }
+                    }
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {}
+                });
                 String areaName = areaNameText.getText().toString();
                 String upiId = upiIdText.getText().toString();
                 String upiName = upiNameText.getText().toString();
@@ -146,6 +182,7 @@ public class Add extends Fragment {
                     final ParkingArea parkingArea = new ParkingArea(areaName/* globalLatLng.latitude, globalLatLng.longitude*/,auth.getCurrentUser().getUid(), Integer.parseInt(totalSlots), 0, Integer.parseInt(amount2), Integer.parseInt(amount3), Integer.parseInt(amount4), slotNos);
                     final UpiInfo upiInfo = new UpiInfo(upiId, upiName);
                     final String key=db.getReference("ParkingAreas").push().getKey();
+
                     db.getReference("ParkingAreas").child(key).setValue(parkingArea).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {

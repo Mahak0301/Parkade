@@ -4,14 +4,16 @@
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="com.google.android.providers.gsf.permission.
-   READ_GSERVICES" />
+    <uses-permission android:name="com.google.android.providers.gsf.permission.    READ_GSERVICES" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.SET_ALARM" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
+    <meta-data
+        android:name="com.google.android.geo.API_KEY"
+        android:value="AIzaSyB3LTP6nkS7X3c28oSPaz9pQwPkD1LwtFI" />
 
     <application
         android:name=".AppConstants"
@@ -24,6 +26,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.PROJECT"
         tools:targetApi="31">
+        <activity
+            android:name=".BookParkingArea"
+            android:exported="false"
+            android:label="@string/title_activity_book_parking_area"
+            android:theme="@style/Theme.PROJECT" />
         <activity
             android:name=".AddPosition"
             android:exported="false" />
@@ -77,7 +84,4 @@
         </activity>
     </application>
 
-    <meta-data
-        android:name="com.google.android.geo.API_KEY"
-        android:value="AIzaSyB3LTP6nkS7X3c28oSPaz9pQwPkD1LwtFI" />
 </manifest>

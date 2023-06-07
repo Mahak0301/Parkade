@@ -58,7 +58,7 @@ public class DashboardOwner extends Fragment {
 
         expandCard = root.findViewById(R.id.expandCard);
         areaName=expandCard.findViewById(R.id.areaNameText);
-        availableText = expandCard.findViewById(R.id.areaNameText);
+        availableText = expandCard.findViewById(R.id.availableText2);
         occupiedText = expandCard.findViewById(R.id.occupiedText);
         price2Text = expandCard.findViewById(R.id.price2Text);
         price3Text = expandCard.findViewById(R.id.price3Text);

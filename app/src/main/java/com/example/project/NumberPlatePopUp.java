@@ -68,7 +68,7 @@ public class NumberPlatePopUp extends AppCompatDialogFragment {
     public void onAttach(Context context) {
         super.onAttach(context);
         try {
-            listener = (NumberPlatePopUpListener) getTargetFragment();
+//            listener = (NumberPlatePopUpListener) getTargetFragment();
         } catch (ClassCastException e) {
             throw new ClassCastException(context.toString() +"must implement NumberPlatePopUpListener");
         }
