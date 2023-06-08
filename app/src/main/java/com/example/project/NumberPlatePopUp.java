@@ -16,7 +16,13 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatDialogFragment;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,19 +32,18 @@ public class NumberPlatePopUp extends AppCompatDialogFragment {
     private Spinner vehicleWheeler;
     int wheelerType=4;
     private NumberPlatePopUpListener listener;
+    String numberPlateText;
 
     List<String> wheeler = new ArrayList<String>();
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         Bundle mArgs = getArguments();
-        String numberPlate = mArgs.getString("numberPlate").toUpperCase();
+        numberPlateText = mArgs.getString("numberPlate").toUpperCase();
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         LayoutInflater inflater = getActivity().getLayoutInflater();
         View view = inflater.inflate(R.layout.include_add_plate_popup_layout, null);
-        builder.setView(view)
-                .setTitle("Add Vehicle")
-                .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+        builder.setView(view).setTitle("Add Vehicle").setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         Intent intent = new Intent();
@@ -48,15 +53,26 @@ public class NumberPlatePopUp extends AppCompatDialogFragment {
                 .setPositiveButton("Add", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        String vehicleNumberStr = vehicleNumber.getText().toString();
-                        Intent intent = new Intent();
-                        intent.putExtra("vehicleNumber",vehicleNumberStr);
-                        intent.putExtra("wheelerType",wheelerType);
-                        listener.onActivityResult(AppConstants.NUMBER_PLATE_POPUP_REQUEST_CODE, Activity.RESULT_OK, intent);
+                        FirebaseAuth auth=FirebaseAuth.getInstance();
+                        FirebaseDatabase db = FirebaseDatabase.getInstance();
+                        final NumberPlate numberPlate = new NumberPlate(numberPlateText,wheelerType,0,auth.getCurrentUser().getUid(),auth.getCurrentUser().getUid()+"_0");
+                        final String key=db.getReference("NumberPlates").push().getKey();
+                        db.getReference("NumberPlates").child(key).setValue(numberPlate).addOnCompleteListener(new OnCompleteListener<Void>(){
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                String vehicleNumberStr = vehicleNumber.getText().toString();
+                            }
+//                        intent.putExtra("vehicleNumber",vehicleNumberStr);
+//                        intent.putExtra("wheelerType",wheelerType);
+
+                        });
+//                        Intent intent = new Intent(getContext(),Scan.class);
+//                        startActivity(intent);
+                        //listener.onActivityResult(AppConstants.NUMBER_PLATE_POPUP_REQUEST_CODE, Activity.RESULT_OK, intent);
                     }
                 });
         vehicleNumber = view.findViewById(R.id.vehicleNumber);
-        vehicleNumber.setText(numberPlate);
+        vehicleNumber.setText(numberPlateText);
         vehicleWheeler = view.findViewById(R.id.vehicleWheeler);
         vehicleNumber.setFilters(new InputFilter[] {new InputFilter.AllCaps()});
         addItemsOnSpinner();
