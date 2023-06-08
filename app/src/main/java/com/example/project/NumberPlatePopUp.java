@@ -61,7 +61,7 @@ public class NumberPlatePopUp extends AppCompatDialogFragment {
                         db.getReference("NumberPlates").child(key).setValue(numberPlate).addOnCompleteListener(new OnCompleteListener<Void>(){
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
-
+                                vehicleNumber.setText(numberPlateText);
                             }
 //                        intent.putExtra("vehicleNumber",vehicleNumberStr);
 //                        intent.putExtra("wheelerType",wheelerType);
