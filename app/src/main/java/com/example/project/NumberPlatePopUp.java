@@ -56,12 +56,12 @@ public class NumberPlatePopUp extends AppCompatDialogFragment {
                         FirebaseAuth auth=FirebaseAuth.getInstance();
                         FirebaseDatabase db = FirebaseDatabase.getInstance();
                         final String key=db.getReference("NumberPlates").push().getKey();
-                        //String vehicleNumberStr = vehicleNumber.getText().toString();
-                        final NumberPlate numberPlate = new NumberPlate(numberPlateText,wheelerType,0,auth.getCurrentUser().getUid(),auth.getCurrentUser().getUid()+"_0");
+                        String vehicleNumberStr = vehicleNumber.getText().toString();
+                        final NumberPlate numberPlate = new NumberPlate(vehicleNumberStr,wheelerType,0,auth.getCurrentUser().getUid(),auth.getCurrentUser().getUid()+"_0");
                         db.getReference("NumberPlates").child(key).setValue(numberPlate).addOnCompleteListener(new OnCompleteListener<Void>(){
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
-                                startActivity(new Intent(getActivity(), Scan.class));
+
                             }
 //                        intent.putExtra("vehicleNumber",vehicleNumberStr);
 //                        intent.putExtra("wheelerType",wheelerType);
