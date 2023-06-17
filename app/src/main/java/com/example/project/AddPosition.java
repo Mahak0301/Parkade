@@ -96,7 +96,7 @@ public class AddPosition extends AppCompatActivity {
                    final ParkingArea parkingArea = new ParkingArea(areaName/* globalLatLng.latitude, globalLatLng.longitude*/,auth.getCurrentUser().getUid(), Integer.parseInt(totalSlots), 0, Integer.parseInt(amount2), Integer.parseInt(amount3), Integer.parseInt(amount4), slotNos);
                    final UpiInfo upiInfo = new UpiInfo(upiId, upiName);
                    final String key=db.getReference("ParkingAreas").push().getKey();
-                   db.getReference("ParkingAreas").child(key).setValue(parkingArea).addOnCompleteListener(new OnCompleteListener<Void>() {
+                   db.getReference("ParkingAreas").child(parkingArea.name).setValue(parkingArea).addOnCompleteListener(new OnCompleteListener<Void>() {
                        @Override
                        public void onComplete(@NonNull Task<Void> task) {
                            if (task.isSuccessful()) {

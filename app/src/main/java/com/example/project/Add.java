@@ -183,7 +183,7 @@ public class Add extends Fragment {
                     final UpiInfo upiInfo = new UpiInfo(upiId, upiName);
                     final String key=db.getReference("ParkingAreas").push().getKey();
 
-                    db.getReference("ParkingAreas").child(key).setValue(parkingArea).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    db.getReference("ParkingAreas").child(parkingArea.name).setValue(parkingArea).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
                             if (task.isSuccessful()) {

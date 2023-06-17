@@ -9,7 +9,7 @@ import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
 public class BookedSlots implements Serializable {
-    public String userID,placeID,numberPlate,slotNo;
+    public String userID,placeName,numberPlate,slotNo;
     public int hasPaid,amount,wheelerType,notificationID,readNotification,readBookedNotification,checkout;
     public Date startTime, endTime, checkoutTime;
 
@@ -17,7 +17,7 @@ public class BookedSlots implements Serializable {
 
     public BookedSlots(String userID, String placeID, String slotNo, String numberPlate, int wheelerType, Date startTime, Date endTime, int hasPaid, int amount,int notificationID,int readNotification,int readBookedNotification){
         this.userID=userID;
-        this.placeID=placeID;
+        this.placeName=placeName;
         this.slotNo=slotNo;
         this.numberPlate=numberPlate;
         this.wheelerType=wheelerType;
