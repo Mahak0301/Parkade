@@ -10,6 +10,7 @@ import android.app.TimePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -60,6 +61,7 @@ public class BookParkingArea extends AppCompatActivity {
     AppConstants globalClass;
     UPIPayment upiPayment=new UPIPayment();
     FloatingActionButton bookBtn;
+    Button CalcAmt;
     UpiInfo upiInfo;
     public String AreaName;
     String name,userID;
@@ -98,6 +100,7 @@ public class BookParkingArea extends AppCompatActivity {
         endTime = findViewById(R.id.endTime);
         endDateText = findViewById(R.id.endDateText);
         endTimeText = findViewById(R.id.endTimeText);
+        CalcAmt=findViewById(R.id.CalcAmt);
         bookBtn=findViewById(R.id.bookBtn);
         mNotificationHelper=new NotificationHelper(this);
         calendar=new GregorianCalendar();
@@ -114,6 +117,7 @@ public class BookParkingArea extends AppCompatActivity {
     }
     private void addItemsOnAreaSpinner() {
 
+        AreaNameList.add("Select an area");
         db.getReference().child("ParkingAreas").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -137,6 +141,8 @@ public class BookParkingArea extends AppCompatActivity {
     }
 
     private void addItemsOnNumberPlateSpinner() {
+        numberPlateWheeler.add(0);
+        numberPlateNumber.add("Select a vehicle");
 
         db.getReference().child("NumberPlates").orderByChild("userID").equalTo(auth.getCurrentUser().getUid())
                 .addListenerForSingleValueEvent(new ValueEventListener(){
@@ -179,8 +185,26 @@ public class BookParkingArea extends AppCompatActivity {
                                 amount3=area.amount3;
                                 amount4=area.amount4;
                                 slotNos=area.slotNos;
-                                amountText.setText(String.valueOf(amount4));
+                               // amountText.setText(String.valueOf(amount4));
                             }
+                            db.getReference().child("ParkingAreas").child(name)
+                                    .addListenerForSingleValueEvent(new ValueEventListener() {
+                                        @Override
+                                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                            ParkingArea parkingArea = snapshot.getValue(ParkingArea.class);
+                                            //setAddValues(parkingArea);
+                                            db.getReference().child("UpiInfo").child(parkingArea.userID).addValueEventListener(new ValueEventListener() {
+                                                @Override
+                                                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                                    upiInfo=snapshot.getValue(UpiInfo.class);
+                                                }
+                                                @Override
+                                                public void onCancelled(@NonNull DatabaseError error) {}
+                                            });
+                                        }
+                                        @Override
+                                        public void onCancelled(@NonNull DatabaseError error) {}
+                                    });
                         }
 
                         @Override
@@ -202,6 +226,7 @@ public class BookParkingArea extends AppCompatActivity {
         });
     }
 
+
     public void addListenerOnNumberPlateSpinnerItemSelection(){
         numberPlateSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -216,6 +241,7 @@ public class BookParkingArea extends AppCompatActivity {
                     numberPlateSpinner.setSelection(getIndex(numberPlateSpinner,numberPlate));
                     String wheelerTypeStr = String.valueOf(bookingSlot.wheelerType);
                     wheelerText.setText(wheelerTypeStr);
+
                 }
             }
             @Override
@@ -235,6 +261,15 @@ public class BookParkingArea extends AppCompatActivity {
         return 0;
     }
     private void attachListeners() {
+        CalcAmt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ParkingArea parkingArea=new ParkingArea(name,userID,totalSlots,occupiedSlots,amount2,amount3,amount4,slotNos);
+                bookingSlot.calcAmount(parkingArea);
+                String amountStr=String.valueOf(bookingSlot.amount);
+                amountText.setText(amountStr);
+            }
+        });
         endDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -252,10 +287,15 @@ public class BookParkingArea extends AppCompatActivity {
             public void onClick(View view) {
                 if(numberPlateSpinner.getSelectedItemPosition()==0){
                     Toast.makeText(BookParkingArea.this, "Please select a vehicle!", Toast.LENGTH_SHORT).show();
-                }else if(bookingSlot.endTime.equals(bookingSlot.startTime)){
+                }else if(areaSpinner.getSelectedItemPosition()==0){
+                    Toast.makeText(BookParkingArea.this, "Please select an area!", Toast.LENGTH_SHORT).show();
+                }
+                else if(bookingSlot.endTime.equals(bookingSlot.startTime)){
                     Toast.makeText(BookParkingArea.this,
                             "Please set the end time!", Toast.LENGTH_SHORT).show();
-                }else if(!bookingSlot.timeDiffValid()){
+                } else if (amountText.getText().toString().isEmpty()) {
+                    Toast.makeText(BookParkingArea.this, "Please Click the Generate Amount Button to know your amount details", Toast.LENGTH_SHORT).show();
+                } else if(!bookingSlot.timeDiffValid()){
                     Toast.makeText(BookParkingArea.this,
                             "Less time difference (<15 minutes)!", Toast.LENGTH_SHORT).show();
                 }else{
@@ -273,7 +313,7 @@ public class BookParkingArea extends AppCompatActivity {
                                         parkingArea.allocateSpace();
                                         db.getReference("ParkingAreas").child(parkingArea.name).setValue(parkingArea);
                                         String note ="Payment for ".concat(bookingSlot.placeName).concat(" and number ").concat(bookingSlot.numberPlate);
-                                  //      Boolean upi=upiPayment.payUsingUpi(String.valueOf(bookingSlot.amount), "micsilveira111@oksbi", "Michael", note,BookParkingArea.this);
+                                  //      Boolean upi=upiPayment.payUsingUpi(String.valueOf(bookingSlot.amount), "mahak@oksbi", "Michael", note,BookParkingArea.this);
 //                                        Boolean upi=upiPayment.payUsingUpi(String.valueOf(bookingSlot.amount), upiInfo.upiId, upiInfo.upiName, note,BookParkingAreaActivity.this);
  //                                       saveData();
 

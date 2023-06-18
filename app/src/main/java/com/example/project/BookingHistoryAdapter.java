@@ -73,7 +73,7 @@ public class BookingHistoryAdapter extends RecyclerView.Adapter<BookingHistoryAd
 
     public void setDatas(MyViewHolder holder, final BookedSlotKey bookedSlotKey){
         final BookedSlots bookedSlot=bookedSlotKey.bookedSlots;
-        holder.slotID.setText(bookedSlotKey.key);
+        holder.slotID.setText(bookedSlotKey.NumberPlate);
         SimpleDateFormat simpleDateFormat=new SimpleDateFormat("dd-MM-yyyy HH:mm a");
         holder.startDate.setText(simpleDateFormat.format(bookedSlot.startTime));
         holder.endDate.setText(simpleDateFormat.format(bookedSlot.checkoutTime));

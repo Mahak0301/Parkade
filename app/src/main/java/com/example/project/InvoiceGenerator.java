@@ -12,6 +12,8 @@ import android.graphics.Typeface;
 import android.graphics.pdf.PdfDocument;
 import android.net.Uri;
 import android.util.Log;
+import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -154,9 +156,9 @@ public class InvoiceGenerator {
             Uri filePath = Uri.fromFile(file);
             if (filePath != null) {
                 //displaying a progress dialog while upload is going on
-                final ProgressDialog progressDialog = new ProgressDialog(context);
-                progressDialog.setTitle("Uploading");
-                progressDialog.show();
+                final ProgressBar progressDialog = new ProgressBar(context);
+                //progressDialog.setTitle("Uploading");
+                progressDialog.setVisibility(View.VISIBLE);
 
                 FirebaseStorage storage = FirebaseStorage.getInstance();
 
@@ -168,7 +170,7 @@ public class InvoiceGenerator {
                                 //if the upload is successfull
                                 //hiding the progress dialog
                                 try {
-                                    progressDialog.dismiss();
+                                    progressDialog.setVisibility(View.GONE);
                                 } catch (Exception e) {
                                     e.printStackTrace();
                                 }
@@ -182,7 +184,7 @@ public class InvoiceGenerator {
                                 //if the upload is not successfull
                                 //hiding the progress dialog
                                 try {
-                                    progressDialog.dismiss();
+                                    progressDialog.setVisibility(View.GONE);
                                 } catch (Exception e) {
                                     e.printStackTrace();
                                 }
@@ -198,7 +200,7 @@ public class InvoiceGenerator {
                                 double progress = (100.0 * taskSnapshot.getBytesTransferred()) / taskSnapshot.getTotalByteCount();
 
                                 //displaying percentage in progress dialog
-                                progressDialog.setMessage("Uploaded " + ((int) progress) + "%...");
+                               // progressDialog.setMessage("Uploaded " + ((int) progress) + "%...");
                             }
                         });
             }

@@ -78,7 +78,8 @@ public class DashboardNormal extends Fragment {
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                             BookedSlots bookedSlot = dataSnapshot.getValue(BookedSlots.class);
-                            BookedSlotKey bookedSlotKey=new BookedSlotKey(bookedSlot,dataSnapshot.getKey());
+                          String  NumberPlate=bookedSlot.numberPlate;
+                            BookedSlotKey bookedSlotKey=new BookedSlotKey(bookedSlot,dataSnapshot.getKey(),NumberPlate);
                             bookedSlotKeyList.add(bookedSlotKey);
                         }
                         mAdapter = new BookingHistoryAdapter(bookedSlotKeyList);

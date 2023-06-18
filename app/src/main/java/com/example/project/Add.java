@@ -80,7 +80,8 @@ public class Add extends Fragment {
     Button loadFromFile;
 
     FusedLocationProviderClient client;
-    List<SlotNoInfo> slotNos = new ArrayList<>();
+
+
     List<String> slotNoString = new ArrayList<>();
     BasicUtils utils=new BasicUtils();
     AppConstants globalClass;
@@ -137,7 +138,20 @@ public class Add extends Fragment {
                     public void onCancelled(@NonNull DatabaseError error) {
                     }
                 });
+        db.getReference().child("UpiInfo").child(auth.getCurrentUser().getUid()).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                UpiInfo  upiInfo=snapshot.getValue(UpiInfo.class);
+                if(upiInfo!=null){
+                    upiIdText.setText(String.valueOf(upiInfo.upiId));
 
+                    upiNameText.setText(String.valueOf(upiInfo.upiName));
+
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {}
+        });
 
     }
 
@@ -147,20 +161,7 @@ public class Add extends Fragment {
             @Override
             public void onClick(View view) {
 
-                db.getReference().child("UpiInfo").child(auth.getCurrentUser().getUid()).addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        UpiInfo  upiInfo=snapshot.getValue(UpiInfo.class);
-                        if(upiInfo!=null){
-                            upiIdText.setText(String.valueOf(upiInfo.upiId));
 
-                            upiNameText.setText(String.valueOf(upiInfo.upiName));
-
-                        }
-                    }
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {}
-                });
                 String areaName = areaNameText.getText().toString();
                 String upiId = upiIdText.getText().toString();
                 String upiName = upiNameText.getText().toString();
@@ -169,6 +170,7 @@ public class Add extends Fragment {
                 String amount4 = amount4Text.getText().toString();
                 String totalSlots = totalSlotsText.getText().toString();
                 int n=Integer.parseInt(totalSlots);
+                List<SlotNoInfo> slotNos = new ArrayList<>(n);
                 for (int i=1;i<=n;i++) {
                     String text=Integer.toString(i);
                     slotNos.add(new SlotNoInfo((String) text,false));
@@ -178,7 +180,6 @@ public class Add extends Fragment {
                 }else if(!utils.isUpiIdValid(upiId)){
                     Toast.makeText(getActivity(), "Invalid UPI ID!", Toast.LENGTH_SHORT).show();
                 }else {
-
                     final ParkingArea parkingArea = new ParkingArea(areaName/* globalLatLng.latitude, globalLatLng.longitude*/,auth.getCurrentUser().getUid(), Integer.parseInt(totalSlots), 0, Integer.parseInt(amount2), Integer.parseInt(amount3), Integer.parseInt(amount4), slotNos);
                     final UpiInfo upiInfo = new UpiInfo(upiId, upiName);
                     final String key=db.getReference("ParkingAreas").push().getKey();

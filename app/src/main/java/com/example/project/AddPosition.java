@@ -52,7 +52,11 @@ public class AddPosition extends AppCompatActivity {
         attachListeners();
 
     }
+    @Override
+    public void onBackPressed() {
+        Toast.makeText(AddPosition.this, "Please add Area Details to proceed! ", Toast.LENGTH_SHORT).show();
 
+    }
     private void initComponents() {
 
         client= LocationServices.getFusedLocationProviderClient(AddPosition.this);

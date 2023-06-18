@@ -289,12 +289,20 @@
                             android:layout_width="@dimen/spacing_middle"
                             android:layout_height="0dp" />
 
-                        <TextView
+                        <Button
+                            android:id="@+id/CalcAmt"
+                            android:layout_width="382dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:background="#7A6565"
+                            android:text="Generate Amount"
+                            app:backgroundTint="#673AB7" />
+
+                        <View
+                            android:id="@+id/view9"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Amount Details"
-                            android:textAppearance="@style/Base.TextAppearance.AppCompat.Subhead"
-                            android:textColor="@color/grey_80" />
+                            android:layout_weight="1" />
 
                     </LinearLayout>
 
@@ -335,8 +343,16 @@
                                 android:textColor="@color/grey_80" />
                         </LinearLayout>
                     </LinearLayout>
+
+                    <ProgressBar
+                        android:id="@+id/ProgressBarBookArea"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="150dp"
+                        android:visibility="gone" />
                 </LinearLayout>
             </androidx.core.widget.NestedScrollView>
+
 
         </LinearLayout>
 
