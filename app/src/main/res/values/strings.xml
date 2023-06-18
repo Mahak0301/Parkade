@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Smart Parking</string>
+    <string name="app_name">Parkade</string>
     <string name="splash_screen">Splash Screen</string>
 
     <string name="firebase_page_protocol">https</string>
