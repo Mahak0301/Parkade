@@ -215,13 +215,13 @@ public class BookingDetails extends AppCompatActivity implements View.OnClickLis
                                         parkingArea.allocateSpace();
                                         db.getReference("ParkingAreas").child(bookingSlot.placeName).setValue(parkingArea);
                                         String note ="Payment for ".concat(bookingSlot.placeName).concat(" and number ").concat(bookingSlot.numberPlate);
-                                        if(userObj.UserType==2){
-                                            bookingSlot.hasPaid=1;
-                                            payData();
-                                        }else {
+//                                        if(userObj.UserType==2){
+//                                            bookingSlot.hasPaid=1;
+//                                            payData();
+//                                        }else {
   //                      upiPayment.payUsingUpi(String.valueOf(bookingSlot.amount), upiInfo.upiId, upiInfo.upiName, note,BookParkingAreaActivity.this
                                            upiPayment.payUsingUpi(String.valueOf(1), "9982648266@ibl", "Mahak", note,BookingDetails.this);
-                                        }
+//                                        }
                                     }
                                 });
                         builder.setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
@@ -293,7 +293,7 @@ public class BookingDetails extends AppCompatActivity implements View.OnClickLis
                     invoiceGenerator.create();
                     invoiceGenerator.uploadFile(BookingDetails.this,getApplication());
                     Intent intent;
-                    if(userObj.UserType==3)
+                    if(userObj.UserType==2)
                         intent = new Intent(BookingDetails.this, MainOwner.class);
                     else
                         intent = new Intent(BookingDetails.this, MainNormal.class);

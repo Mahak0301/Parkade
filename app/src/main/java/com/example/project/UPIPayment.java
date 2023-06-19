@@ -67,7 +67,7 @@ public class UPIPayment {
         ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
         if (connectivityManager != null) {
             NetworkInfo netInfo = connectivityManager.getActiveNetworkInfo();
-            if (netInfo != null && netInfo.isConnected()
+            if (netInfo != null /*&& netInfo.isConnected()*/
                     && netInfo.isConnectedOrConnecting()
                     && netInfo.isAvailable()) {
                 return true;
