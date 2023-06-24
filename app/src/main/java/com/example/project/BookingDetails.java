@@ -200,7 +200,7 @@ public class BookingDetails extends AppCompatActivity implements View.OnClickLis
             @Override
             public void onClick(View view) {
                 if(utils.isNetworkAvailable(getApplication())){
-                    if(parkingArea.availableSlots>0) {
+//                    if(parkingArea.availableSlots>0) {
                         AlertDialog.Builder builder = new AlertDialog.Builder(BookingDetails.this);
                         builder.setCancelable(true);
                         builder.setTitle("Confirm Payment");
@@ -219,9 +219,10 @@ public class BookingDetails extends AppCompatActivity implements View.OnClickLis
 //                                            bookingSlot.hasPaid=1;
 //                                            payData();
 //                                        }else {
-  //                      upiPayment.payUsingUpi(String.valueOf(bookingSlot.amount), upiInfo.upiId, upiInfo.upiName, note,BookParkingAreaActivity.this
-                                           upiPayment.payUsingUpi(String.valueOf(1), "9982648266@ibl", "Mahak", note,BookingDetails.this);
+//                      upiPayment.payUsingUpi(String.valueOf(bookingSlot.amount), upiInfo.upiId, upiInfo.upiName, note,BookParkingAreaActivity.this
+                                           upiPayment.payUsingUpi(String.valueOf(1), "Q613169246@ybl", "Sharda Sales", note,BookingDetails.this);
 //                                        }
+
                                     }
                                 });
                         builder.setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
@@ -232,9 +233,9 @@ public class BookingDetails extends AppCompatActivity implements View.OnClickLis
                         });
                         AlertDialog dialog = builder.create();
                         dialog.show();
-                    }else{
-                        Toast.makeText(BookingDetails.this,"Failed! Slots are full.",Toast.LENGTH_SHORT).show();
-                    }
+//                    }else{
+//                        Toast.makeText(BookingDetails.this,"Failed! Slots are full.",Toast.LENGTH_SHORT).show();
+//                    }
                 }else{
                     Toast.makeText(BookingDetails.this, "No Network Available!", Toast.LENGTH_SHORT).show();
                 }
