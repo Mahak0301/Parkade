@@ -44,7 +44,7 @@ import java.util.Objects;
 
 public class BookParkingArea extends AppCompatActivity {
     Spinner numberPlateSpinner,areaSpinner;
-    TextView wheelerText,amountText,endDateText,endTimeText;
+    TextView wheelerText,amountText,endDateText,endTimeText,avSlots;
     LinearLayout endDate,endTime;
     Calendar calendar;
     NotificationHelper mNotificationHelper;
@@ -95,6 +95,7 @@ public class BookParkingArea extends AppCompatActivity {
         wheelerText = findViewById(R.id.wheelerText);
         numberPlateSpinner=findViewById(R.id.vehicleSelect);
         areaSpinner=findViewById(R.id.areaSelect);
+        avSlots=findViewById(R.id.available);
         amountText = findViewById(R.id.amountText);
         endDate = findViewById(R.id.endDate);
         endTime = findViewById(R.id.endTime);
@@ -185,6 +186,10 @@ public class BookParkingArea extends AppCompatActivity {
                                 amount3=area.amount3;
                                 amount4=area.amount4;
                                 slotNos=area.slotNos;
+                                if(availableSlots==0)
+                                    Toast.makeText(BookParkingArea.this,"Please Select Another Area!",Toast.LENGTH_SHORT).show();
+                                String availableSlot=String.valueOf(area.availableSlots);
+                                avSlots.setText("Available Slots:"+availableSlot);
                                // amountText.setText(String.valueOf(amount4));
                             }
                             db.getReference().child("ParkingAreas").child(name)

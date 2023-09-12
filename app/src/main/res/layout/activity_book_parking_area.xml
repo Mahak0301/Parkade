@@ -13,345 +13,11 @@
         android:background="@android:color/background_light">
 
         <LinearLayout
+            android:id="@+id/linearLayout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@color/grey_10"
             android:orientation="vertical">
-
-
-
-            <androidx.core.widget.NestedScrollView
-                android:id="@+id/nested_scroll_view"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@color/white"
-                android:clipToPadding="false"
-                android:padding="@dimen/spacing_large"
-                android:scrollbars="none"
-                android:scrollingCache="true"
-                app:layout_behavior="@string/appbar_scrolling_view_behavior">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/spacing_middle"
-                        android:gravity="center_vertical"
-                        android:orientation="horizontal">
-
-                        <ImageView
-                            android:layout_width="@dimen/spacing_middle"
-                            android:layout_height="@dimen/spacing_middle"
-                            android:layout_margin="@dimen/spacing_medium"
-                            android:src="@drawable/shape_circle"
-                            app:tint="@color/red_400" />
-
-                        <View
-                            android:layout_width="@dimen/spacing_middle"
-                            android:layout_height="0dp" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Booking Details"
-                            android:textAppearance="@style/Base.TextAppearance.AppCompat.Subhead"
-                            android:textColor="@color/grey_80" />
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_margin="10dp"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical">
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:background="?attr/selectableItemBackground"
-                            android:clickable="true"
-                            android:gravity="center_vertical"
-                            android:minHeight="@dimen/spacing_xxlarge"
-                            android:orientation="horizontal"
-                            android:paddingRight="@dimen/spacing_small">
-
-                            <ImageButton
-                                android:layout_width="@dimen/spacing_xmlarge"
-                                android:layout_height="@dimen/spacing_xmlarge"
-                                android:background="@android:color/transparent"
-
-                                app:srcCompat="@drawable/ic_baseline_location_on_24"
-                                tools:ignore="SpeakableTextPresentCheck" />
-
-                            <View
-                                android:layout_width="@dimen/spacing_large"
-                                android:layout_height="wrap_content" />
-                            <Spinner
-                                android:id="@+id/areaSelect"
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                app:layout_constraintTop_toBottomOf="@+id/slotNoText"
-                                />
-
-<!--                            <TextView-->
-<!--                                android:id="@+id/placeText"-->
-<!--                                android:layout_width="wrap_content"-->
-<!--                                android:layout_height="wrap_content"-->
-<!--                                android:text=""-->
-<!--                                android:textAppearance="@style/TextAppearance.AppCompat.Subhead"-->
-<!--                                android:textColor="@color/grey_80" />-->
-                        </LinearLayout>
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:background="?attr/selectableItemBackground"
-                            android:clickable="true"
-                            android:gravity="center_vertical"
-                            android:minHeight="@dimen/spacing_xxlarge"
-                            android:orientation="horizontal"
-                            android:paddingRight="@dimen/spacing_small">
-
-                            <ImageButton
-                                android:layout_width="@dimen/spacing_xmlarge"
-                                android:layout_height="@dimen/spacing_xmlarge"
-                                android:background="@android:color/transparent"
-
-                                app:srcCompat="@drawable/ic_plate_number"
-                                tools:ignore="SpeakableTextPresentCheck" />
-
-                            <View
-                                android:layout_width="@dimen/spacing_large"
-                                android:layout_height="wrap_content" />
-                            <Spinner
-                                android:id="@+id/vehicleSelect"
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                app:layout_constraintTop_toBottomOf="@+id/slotNoText"
-                                />
-
-                        </LinearLayout>
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:background="?attr/selectableItemBackground"
-                            android:clickable="true"
-                            android:gravity="center_vertical"
-                            android:minHeight="@dimen/spacing_xxlarge"
-                            android:orientation="horizontal"
-                            android:paddingRight="@dimen/spacing_small">
-
-                            <ImageButton
-                                android:layout_width="@dimen/spacing_xmlarge"
-                                android:layout_height="@dimen/spacing_xmlarge"
-                                android:background="@android:color/transparent"
-
-                                app:srcCompat="@drawable/ic_baseline_directions_car_24"
-                                tools:ignore="SpeakableTextPresentCheck" />
-
-                            <View
-                                android:layout_width="@dimen/spacing_large"
-                                android:layout_height="wrap_content" />
-                            <TextView
-                                android:id="@+id/wheelerText"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Wheeler Type"
-                                android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
-                                android:textColor="@color/grey_80" />
-                        </LinearLayout>
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/spacing_middle"
-                        android:gravity="center_vertical"
-                        android:orientation="horizontal">
-
-                        <ImageView
-                            android:layout_width="@dimen/spacing_middle"
-                            android:layout_height="@dimen/spacing_middle"
-                            android:layout_margin="@dimen/spacing_medium"
-                            android:src="@drawable/shape_circle"
-                            app:tint="@color/red_400" />
-
-                        <View
-                            android:layout_width="@dimen/spacing_middle"
-                            android:layout_height="0dp" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Set Exit Date and Time"
-                            android:textAppearance="@style/Base.TextAppearance.AppCompat.Subhead"
-                            android:textColor="@color/grey_80" />
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_margin="10dp"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical">
-
-                        <LinearLayout
-                            android:id="@+id/endDate"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:background="?attr/selectableItemBackground"
-                            android:clickable="true"
-                            android:gravity="center_vertical"
-                            android:minHeight="@dimen/spacing_xxlarge"
-                            android:orientation="horizontal"
-                            android:paddingRight="@dimen/spacing_small">
-
-                            <ImageButton
-                                android:layout_width="@dimen/spacing_xmlarge"
-                                android:layout_height="@dimen/spacing_xmlarge"
-                                android:background="@android:color/transparent"
-
-                                app:srcCompat="@drawable/ic_baseline_calendar_today_24"
-                                tools:ignore="SpeakableTextPresentCheck" />
-
-                            <View
-                                android:layout_width="@dimen/spacing_large"
-                                android:layout_height="wrap_content" />
-
-                            <TextView
-                                android:id="@+id/endDateText"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text=""
-                                android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
-                                android:textColor="@color/grey_80" />
-
-                        </LinearLayout>
-                        <LinearLayout
-                            android:id="@+id/endTime"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:background="?attr/selectableItemBackground"
-                            android:clickable="true"
-                            android:gravity="center_vertical"
-                            android:minHeight="@dimen/spacing_xxlarge"
-                            android:orientation="horizontal"
-                            android:paddingRight="@dimen/spacing_small">
-
-                            <ImageButton
-                                android:layout_width="@dimen/spacing_xmlarge"
-                                android:layout_height="@dimen/spacing_xmlarge"
-                                android:background="@android:color/transparent"
-
-                                app:srcCompat="@drawable/ic_baseline_access_time_24"
-                                tools:ignore="SpeakableTextPresentCheck" />
-
-                            <View
-                                android:layout_width="@dimen/spacing_large"
-                                android:layout_height="wrap_content" />
-
-                            <TextView
-                                android:id="@+id/endTimeText"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text=""
-                                android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
-                                android:textColor="@color/grey_80" />
-                        </LinearLayout>
-                    </LinearLayout>
-
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:background="@color/grey_10"  />
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/spacing_middle"
-                        android:gravity="center_vertical"
-                        android:orientation="horizontal">
-
-                        <ImageView
-                            android:layout_width="@dimen/spacing_middle"
-                            android:layout_height="@dimen/spacing_middle"
-                            android:layout_margin="@dimen/spacing_medium"
-                            android:src="@drawable/shape_circle"
-                            app:tint="@color/red_400" />
-
-                        <View
-                            android:layout_width="@dimen/spacing_middle"
-                            android:layout_height="0dp" />
-
-                        <Button
-                            android:id="@+id/CalcAmt"
-                            android:layout_width="382dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:background="#7A6565"
-                            android:text="Generate Amount"
-                            app:backgroundTint="#673AB7" />
-
-                        <View
-                            android:id="@+id/view9"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1" />
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_margin="10dp"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical">
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:background="?attr/selectableItemBackground"
-                            android:clickable="true"
-                            android:gravity="center_vertical"
-                            android:minHeight="@dimen/spacing_xxlarge"
-                            android:orientation="horizontal"
-                            android:paddingRight="@dimen/spacing_small">
-
-                            <ImageButton
-                                android:layout_width="@dimen/spacing_xmlarge"
-                                android:layout_height="@dimen/spacing_xmlarge"
-                                android:background="@android:color/transparent"
-
-                                app:srcCompat="@drawable/ic_rupee_indian"
-                                tools:ignore="SpeakableTextPresentCheck" />
-
-                            <View
-                                android:layout_width="@dimen/spacing_large"
-                                android:layout_height="wrap_content" />
-
-                            <TextView
-                                android:id="@+id/amountText"
-                                android:layout_width="161dp"
-                                android:layout_height="wrap_content"
-                                android:text="0"
-                                android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
-                                android:textColor="@color/grey_80" />
-                        </LinearLayout>
-                    </LinearLayout>
-
-                    <ProgressBar
-                        android:id="@+id/ProgressBarBookArea"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="150dp"
-                        android:visibility="gone" />
-                </LinearLayout>
-            </androidx.core.widget.NestedScrollView>
 
 
         </LinearLayout>
@@ -369,6 +35,370 @@
             app:rippleColor="@android:color/white"
             app:srcCompat="@drawable/ic_baseline_save_24"
             tools:ignore="SpeakableTextPresentCheck" />
+
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/nested_scroll_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            android:clipToPadding="false"
+            android:padding="@dimen/spacing_large"
+            android:scrollbars="none"
+            android:scrollingCache="true"
+            app:layout_anchor="@+id/linearLayout"
+            app:layout_anchorGravity="center"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_middle"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="@dimen/spacing_middle"
+                        android:layout_height="@dimen/spacing_middle"
+                        android:layout_margin="@dimen/spacing_medium"
+                        android:src="@drawable/shape_circle"
+                        app:tint="@color/red_400" />
+
+                    <View
+                        android:layout_width="@dimen/spacing_middle"
+                        android:layout_height="0dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Booking Details"
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Subhead"
+                        android:textColor="@color/grey_80" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="?attr/selectableItemBackground"
+                        android:clickable="true"
+                        android:gravity="center_vertical"
+                        android:minHeight="@dimen/spacing_xxlarge"
+                        android:orientation="horizontal"
+                        android:paddingRight="@dimen/spacing_small">
+
+                        <ImageButton
+                            android:layout_width="@dimen/spacing_xmlarge"
+                            android:layout_height="@dimen/spacing_xmlarge"
+                            android:background="@android:color/transparent"
+
+                            app:srcCompat="@drawable/ic_baseline_location_on_24"
+                            tools:ignore="SpeakableTextPresentCheck" />
+
+                        <View
+                            android:layout_width="@dimen/spacing_large"
+                            android:layout_height="wrap_content" />
+
+                        <Spinner
+                            android:id="@+id/areaSelect"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            app:layout_constraintTop_toBottomOf="@+id/slotNoText" />
+
+                        <!--                            <TextView-->
+                        <!--                                android:id="@+id/placeText"-->
+                        <!--                                android:layout_width="wrap_content"-->
+                        <!--                                android:layout_height="wrap_content"-->
+                        <!--                                android:text=""-->
+                        <!--                                android:textAppearance="@style/TextAppearance.AppCompat.Subhead"-->
+                        <!--                                android:textColor="@color/grey_80" />-->
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="?attr/selectableItemBackground"
+                        android:clickable="true"
+                        android:gravity="center_vertical"
+                        android:minHeight="@dimen/spacing_xxlarge"
+                        android:orientation="horizontal"
+                        android:paddingRight="@dimen/spacing_small">
+
+                        <TextView
+                            android:id="@+id/available"
+                            android:layout_width="205dp"
+                            android:layout_height="21dp"
+                            android:layout_weight="1"
+                            android:text="Slots Available:"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                            android:textColor="@color/grey_80" />
+
+                        <View
+                            android:layout_width="@dimen/spacing_large"
+                            android:layout_height="wrap_content" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="?attr/selectableItemBackground"
+                        android:clickable="true"
+                        android:gravity="center_vertical"
+                        android:minHeight="@dimen/spacing_xxlarge"
+                        android:orientation="horizontal"
+                        android:paddingRight="@dimen/spacing_small">
+
+                        <ImageButton
+                            android:layout_width="@dimen/spacing_xmlarge"
+                            android:layout_height="@dimen/spacing_xmlarge"
+                            android:background="@android:color/transparent"
+
+                            app:srcCompat="@drawable/ic_plate_number"
+                            tools:ignore="SpeakableTextPresentCheck" />
+
+                        <View
+                            android:layout_width="@dimen/spacing_large"
+                            android:layout_height="wrap_content" />
+
+                        <Spinner
+                            android:id="@+id/vehicleSelect"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            app:layout_constraintTop_toBottomOf="@+id/slotNoText" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="?attr/selectableItemBackground"
+                        android:clickable="true"
+                        android:gravity="center_vertical"
+                        android:minHeight="@dimen/spacing_xxlarge"
+                        android:orientation="horizontal"
+                        android:paddingRight="@dimen/spacing_small">
+
+                        <ImageButton
+                            android:layout_width="@dimen/spacing_xmlarge"
+                            android:layout_height="@dimen/spacing_xmlarge"
+                            android:background="@android:color/transparent"
+
+                            app:srcCompat="@drawable/ic_baseline_directions_car_24"
+                            tools:ignore="SpeakableTextPresentCheck" />
+
+                        <View
+                            android:layout_width="@dimen/spacing_large"
+                            android:layout_height="wrap_content" />
+
+                        <TextView
+                            android:id="@+id/wheelerText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Wheeler Type"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                            android:textColor="@color/grey_80" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_middle"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="@dimen/spacing_middle"
+                        android:layout_height="@dimen/spacing_middle"
+                        android:layout_margin="@dimen/spacing_medium"
+                        android:src="@drawable/shape_circle"
+                        app:tint="@color/red_400" />
+
+                    <View
+                        android:layout_width="@dimen/spacing_middle"
+                        android:layout_height="0dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Set Exit Date and Time"
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Subhead"
+                        android:textColor="@color/grey_80" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:id="@+id/endDate"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="?attr/selectableItemBackground"
+                        android:clickable="true"
+                        android:gravity="center_vertical"
+                        android:minHeight="@dimen/spacing_xxlarge"
+                        android:orientation="horizontal"
+                        android:paddingRight="@dimen/spacing_small">
+
+                        <ImageButton
+                            android:layout_width="@dimen/spacing_xmlarge"
+                            android:layout_height="@dimen/spacing_xmlarge"
+                            android:background="@android:color/transparent"
+
+                            app:srcCompat="@drawable/ic_baseline_calendar_today_24"
+                            tools:ignore="SpeakableTextPresentCheck" />
+
+                        <View
+                            android:layout_width="@dimen/spacing_large"
+                            android:layout_height="wrap_content" />
+
+                        <TextView
+                            android:id="@+id/endDateText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text=""
+                            android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                            android:textColor="@color/grey_80" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/endTime"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="?attr/selectableItemBackground"
+                        android:clickable="true"
+                        android:gravity="center_vertical"
+                        android:minHeight="@dimen/spacing_xxlarge"
+                        android:orientation="horizontal"
+                        android:paddingRight="@dimen/spacing_small">
+
+                        <ImageButton
+                            android:layout_width="@dimen/spacing_xmlarge"
+                            android:layout_height="@dimen/spacing_xmlarge"
+                            android:background="@android:color/transparent"
+
+                            app:srcCompat="@drawable/ic_baseline_access_time_24"
+                            tools:ignore="SpeakableTextPresentCheck" />
+
+                        <View
+                            android:layout_width="@dimen/spacing_large"
+                            android:layout_height="wrap_content" />
+
+                        <TextView
+                            android:id="@+id/endTimeText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text=""
+                            android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                            android:textColor="@color/grey_80" />
+                    </LinearLayout>
+                </LinearLayout>
+
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/grey_10" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_middle"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="@dimen/spacing_middle"
+                        android:layout_height="@dimen/spacing_middle"
+                        android:layout_margin="@dimen/spacing_medium"
+                        android:src="@drawable/shape_circle"
+                        app:tint="@color/red_400" />
+
+                    <View
+                        android:layout_width="@dimen/spacing_middle"
+                        android:layout_height="0dp" />
+
+                    <Button
+                        android:id="@+id/CalcAmt"
+                        android:layout_width="382dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="#7A6565"
+                        android:text="Generate Amount"
+                        app:backgroundTint="#673AB7" />
+
+                    <View
+                        android:id="@+id/view9"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="?attr/selectableItemBackground"
+                        android:clickable="true"
+                        android:gravity="center_vertical"
+                        android:minHeight="@dimen/spacing_xxlarge"
+                        android:orientation="horizontal"
+                        android:paddingRight="@dimen/spacing_small">
+
+                        <ImageButton
+                            android:layout_width="@dimen/spacing_xmlarge"
+                            android:layout_height="@dimen/spacing_xmlarge"
+                            android:background="@android:color/transparent"
+
+                            app:srcCompat="@drawable/ic_rupee_indian"
+                            tools:ignore="SpeakableTextPresentCheck" />
+
+                        <View
+                            android:layout_width="@dimen/spacing_large"
+                            android:layout_height="wrap_content" />
+
+                        <TextView
+                            android:id="@+id/amountText"
+                            android:layout_width="161dp"
+                            android:layout_height="wrap_content"
+                            android:text="0"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                            android:textColor="@color/grey_80" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <ProgressBar
+                    android:id="@+id/ProgressBarBookArea"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="150dp"
+                    android:visibility="gone" />
+            </LinearLayout>
+        </androidx.core.widget.NestedScrollView>
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </RelativeLayout>
