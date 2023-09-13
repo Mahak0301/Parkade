@@ -214,7 +214,7 @@ public class BookingDetails extends AppCompatActivity implements View.OnClickLis
                                     public void onClick(DialogInterface dialog, int which) {
                                         parkingArea.allocateSpace();
                                         db.getReference("ParkingAreas").child(bookingSlot.placeName).setValue(parkingArea);
-                                        String note ="Payment for ".concat(bookingSlot.placeName).concat(" and number ").concat(bookingSlot.numberPlate);
+                                        String note ="Payment for ".concat(bookingSlot.placeName).concat(" and number ").concat(bookingSlot.numberPlate).concat(String.valueOf(bookingSlot.amount));
 //                                        if(userObj.UserType==2){
 //                                            bookingSlot.hasPaid=1;
 //                                            payData();
