@@ -44,8 +44,8 @@ import java.util.Objects;
 
 public class BookParkingArea extends AppCompatActivity {
     Spinner numberPlateSpinner,areaSpinner;
-    TextView wheelerText,amountText,endDateText,endTimeText,avSlots;
-    LinearLayout endDate,endTime;
+    TextView wheelerText,amountText,entryDateText,entryTimeText,endDateText,endTimeText,avSlots;
+    LinearLayout entryDate,entryTime,endDate,endTime;
     Calendar calendar;
     NotificationHelper mNotificationHelper;
     FirebaseAuth auth;
@@ -86,8 +86,6 @@ public class BookParkingArea extends AppCompatActivity {
     }
     private void initComponents() {
         auth = FirebaseAuth.getInstance();
-
-
         db = FirebaseDatabase.getInstance();
         reference = FirebaseDatabase.getInstance().getReference("ParkingAreas");
         globalClass=(AppConstants)getApplicationContext();
@@ -97,6 +95,10 @@ public class BookParkingArea extends AppCompatActivity {
         areaSpinner=findViewById(R.id.areaSelect);
         avSlots=findViewById(R.id.available);
         amountText = findViewById(R.id.amountText);
+        entryDate=findViewById(R.id.startDate);
+        entryTime=findViewById(R.id.startTime);
+        entryDateText=findViewById(R.id.entryDateText);
+        entryTimeText=findViewById(R.id.entryTimeText);
         endDate = findViewById(R.id.endDate);
         endTime = findViewById(R.id.endTime);
         endDateText = findViewById(R.id.endDateText);
@@ -107,9 +109,11 @@ public class BookParkingArea extends AppCompatActivity {
         calendar=new GregorianCalendar();
         bookingSlot.startTime=bookingSlot.endTime=bookingSlot.checkoutTime=calendar.getTime();
         SimpleDateFormat simpleDateFormat=new SimpleDateFormat("hh:mm a");
+        entryTimeText.setText(simpleDateFormat.format(bookingSlot.startTime));
         endTimeText.setText(simpleDateFormat.format(bookingSlot.endTime));
         simpleDateFormat=new SimpleDateFormat("dd-MM-yyyy");
         endDateText.setText(simpleDateFormat.format(bookingSlot.endTime));
+        entryDateText.setText(simpleDateFormat.format(bookingSlot.endTime));
         bookingSlot.readNotification=0;
         bookingSlot.readBookedNotification=1;
         bookingSlot.hasPaid=0;
@@ -190,7 +194,7 @@ public class BookParkingArea extends AppCompatActivity {
                                     Toast.makeText(BookParkingArea.this,"Please Select Another Area!",Toast.LENGTH_SHORT).show();
                                 String availableSlot=String.valueOf(area.availableSlots);
                                 avSlots.setText("Available Slots:"+availableSlot);
-                               // amountText.setText(String.valueOf(amount4));
+                                // amountText.setText(String.valueOf(amount4));
                             }
                             db.getReference().child("ParkingAreas").child(name)
                                     .addListenerForSingleValueEvent(new ValueEventListener() {
@@ -275,16 +279,29 @@ public class BookParkingArea extends AppCompatActivity {
                 amountText.setText(amountStr);
             }
         });
+        entryDate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showEntryDatePicker(entryDateText);
+            }
+        });
+        entryTime.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showEntryTimePicker(entryTimeText);
+            }
+        });
+
         endDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                showDatePicker(endDateText);
+                showEndDatePicker(endDateText);
             }
         });
         endTime.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                showTimePicker(endTimeText);
+                showEndTimePicker(endTimeText);
             }
         });
         bookBtn.setOnClickListener(new View.OnClickListener() {
@@ -303,6 +320,8 @@ public class BookParkingArea extends AppCompatActivity {
                 } else if(!bookingSlot.timeDiffValid()){
                     Toast.makeText(BookParkingArea.this,
                             "Less time difference (<15 minutes)!", Toast.LENGTH_SHORT).show();
+                }else if(bookingSlot.endTime.before(bookingSlot.startTime)){
+                    Toast.makeText(BookParkingArea.this, "Please select an end time after start time", Toast.LENGTH_SHORT).show();
                 }else{
                     AlertDialog.Builder builder = new AlertDialog.Builder(BookParkingArea.this);
                     builder.setCancelable(true);
@@ -318,36 +337,36 @@ public class BookParkingArea extends AppCompatActivity {
                                         parkingArea.allocateSpace();
                                         db.getReference("ParkingAreas").child(parkingArea.name).setValue(parkingArea);
                                         String note ="Payment for ".concat(bookingSlot.placeName).concat(" and number ").concat(bookingSlot.numberPlate);
-                                  //      Boolean upi=upiPayment.payUsingUpi(String.valueOf(bookingSlot.amount), "mahak@oksbi", "Michael", note,BookParkingArea.this);
+                                        //      Boolean upi=upiPayment.payUsingUpi(String.valueOf(bookingSlot.amount), "mahak@oksbi", "Michael", note,BookParkingArea.this);
 //                                        Boolean upi=upiPayment.payUsingUpi(String.valueOf(bookingSlot.amount), upiInfo.upiId, upiInfo.upiName, note,BookParkingAreaActivity.this);
- //                                       saveData();
+                                        //                                       saveData();
 
-                                            bookingSlot.notificationID=Math.abs((int)Calendar.getInstance().getTimeInMillis());
-                                            final String key=db.getReference("BookedSlots").push().getKey();
-                                            bookingSlot.slotNo=parkingArea.allocateSlot(bookingSlot.numberPlate);
-                                            db.getReference("BookedSlots").child(key).setValue(bookingSlot).addOnCompleteListener(new OnCompleteListener<Void>() {
-                                                @Override
-                                                public void onComplete(@NonNull Task<Void> task) {
-                                                    if(task.isSuccessful()){
-                                                        db.getReference("ParkingAreas").child(bookingSlot.placeName).setValue(parkingArea);
-                                                        Toast.makeText(BookParkingArea.this,"Success",Toast.LENGTH_SHORT).show();
-                                                        File file = new File(BookParkingArea.this.getExternalCacheDir(), File.separator + "invoice.pdf");
-                                                        InvoiceGenerator invoiceGenerator=new InvoiceGenerator(bookingSlot,parkingArea,key,userObj,file);
-                                                        invoiceGenerator.create();
-                                                        invoiceGenerator.uploadFile(BookParkingArea.this,getApplication());
-                                                        Intent intent = new Intent(BookParkingArea.this, MainNormal.class);
-                                                        intent.putExtra("FRAGMENT_NO", 0);
-                                                        startActivity(intent);
-                                                        //overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);  //slide from left to right
-                                                        finish();
-                                                    }else{
-                                                        Toast.makeText(BookParkingArea.this,"Failed",Toast.LENGTH_SHORT).show();
-                                                        parkingArea.deallocateSpace();
-                                                        parkingArea.deallocateSlot(bookingSlot.slotNo);
-                                                        db.getReference("ParkingAreas").child(bookingSlot.placeName).setValue(parkingArea);
-                                                    }
+                                        bookingSlot.notificationID=Math.abs((int)Calendar.getInstance().getTimeInMillis());
+                                        final String key=db.getReference("BookedSlots").push().getKey();
+                                        bookingSlot.slotNo=parkingArea.allocateSlot(bookingSlot.numberPlate);
+                                        db.getReference("BookedSlots").child(key).setValue(bookingSlot).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<Void> task) {
+                                                if(task.isSuccessful()){
+                                                    db.getReference("ParkingAreas").child(bookingSlot.placeName).setValue(parkingArea);
+                                                    Toast.makeText(BookParkingArea.this,"Success",Toast.LENGTH_SHORT).show();
+                                                    File file = new File(BookParkingArea.this.getExternalCacheDir(), File.separator + "invoice.pdf");
+                                                    InvoiceGenerator invoiceGenerator=new InvoiceGenerator(bookingSlot,parkingArea,key,userObj,file);
+                                                    invoiceGenerator.create();
+                                                    invoiceGenerator.uploadFile(BookParkingArea.this,getApplication());
+                                                    Intent intent = new Intent(BookParkingArea.this, MainNormal.class);
+                                                    intent.putExtra("FRAGMENT_NO", 0);
+                                                    startActivity(intent);
+                                                    //overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);  //slide from left to right
+                                                    finish();
+                                                }else{
+                                                    Toast.makeText(BookParkingArea.this,"Failed",Toast.LENGTH_SHORT).show();
+                                                    parkingArea.deallocateSpace();
+                                                    parkingArea.deallocateSlot(bookingSlot.slotNo);
+                                                    db.getReference("ParkingAreas").child(bookingSlot.placeName).setValue(parkingArea);
                                                 }
-                                            });
+                                            }
+                                        });
 
                                     }else{
                                         Toast.makeText(BookParkingArea.this,"Failed! Slots are full.",Toast.LENGTH_SHORT).show();
@@ -367,7 +386,7 @@ public class BookParkingArea extends AppCompatActivity {
         });
 
     }
-    private void showDatePicker(final TextView button) {
+    private void showEndDatePicker(final TextView button) {
         DatePickerDialog.OnDateSetListener dateSetListener=new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker datePicker, int year, int month, final int date) {
@@ -377,6 +396,27 @@ public class BookParkingArea extends AppCompatActivity {
                 SimpleDateFormat simpleDateFormat=new SimpleDateFormat("dd-MM-yyyy");
                 button.setText(simpleDateFormat.format(calendar.getTime()));
                 bookingSlot.endTime = bookingSlot.checkoutTime = calendar.getTime();
+                if(bookingSlot.endTime.before(bookingSlot.startTime)){
+                    Toast.makeText(BookParkingArea.this,
+                            "Please select a time after Entry Date!", Toast.LENGTH_SHORT).show();
+                }
+                //calcRefreshAmount();
+            }
+        };
+        DatePickerDialog datePickerDialog=new DatePickerDialog(BookParkingArea.this,dateSetListener,calendar.get(Calendar.YEAR),calendar.get(Calendar.MONTH),calendar.get(Calendar.DAY_OF_MONTH));
+        datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
+        datePickerDialog.show();
+    }
+    private void showEntryDatePicker(final TextView button) {
+        DatePickerDialog.OnDateSetListener dateSetListener=new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker datePicker, int year, int month, final int date) {
+                calendar.set(Calendar.YEAR,year);
+                calendar.set(Calendar.MONTH,month);
+                calendar.set(Calendar.DAY_OF_MONTH,date);
+                SimpleDateFormat simpleDateFormat=new SimpleDateFormat("dd-MM-yyyy");
+                button.setText(simpleDateFormat.format(calendar.getTime()));
+                bookingSlot.startTime = calendar.getTime();
                 //calcRefreshAmount();
             }
         };
@@ -391,7 +431,7 @@ public class BookParkingArea extends AppCompatActivity {
 //        amountText.setText(amountStr);
 //    }
 
-    private void showTimePicker(final TextView button) {
+    private void showEndTimePicker(final TextView button) {
         TimePickerDialog.OnTimeSetListener timeSetListener= new TimePickerDialog.OnTimeSetListener() {
             @Override
             public void onTimeSet(TimePicker timePicker, int hour, int minute) {
@@ -414,9 +454,29 @@ public class BookParkingArea extends AppCompatActivity {
         TimePickerDialog timePickerDialog=new TimePickerDialog(BookParkingArea.this,timeSetListener,calendar.get(Calendar.HOUR_OF_DAY),calendar.get(Calendar.MINUTE),false);
         timePickerDialog.show();
     }
-//    private void setAddValues(ParkingArea parkingArea) {
-//        this.parkingArea=parkingArea;
-//    }
+    private void showEntryTimePicker(final TextView button) {
+        TimePickerDialog.OnTimeSetListener timeSetListener= new TimePickerDialog.OnTimeSetListener() {
+            @Override
+            public void onTimeSet(TimePicker timePicker, int hour, int minute) {
+                calendar.set(Calendar.HOUR_OF_DAY,hour);
+                calendar.set(Calendar.MINUTE,minute);
+                calendar.set(Calendar.SECOND, 0);
+                SimpleDateFormat simpleDateFormat=new SimpleDateFormat("hh:mm a");
+                bookingSlot.startTime= calendar.getTime();
+                if(bookingSlot.startTime.before(calendar.getTime())){
+                    //button.setText(simpleDateFormat.format(calendar.getTime()));
+                    Toast.makeText(BookParkingArea.this,
+                            "Please select a time after Present time!", Toast.LENGTH_SHORT).show();
+                    // bookingSlot.endTime = bookingSlot.checkoutTime = calendar.getTime();
+                    //  calcRefreshAmount();
+                }
+                else{
+                    button.setText(simpleDateFormat.format(calendar.getTime()));
+                }
+            }
+        };
+        TimePickerDialog timePickerDialog=new TimePickerDialog(BookParkingArea.this,timeSetListener,calendar.get(Calendar.HOUR_OF_DAY),calendar.get(Calendar.MINUTE),false);
+        timePickerDialog.show();
+    }
+
 }
-
-
