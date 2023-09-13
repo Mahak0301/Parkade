@@ -66,7 +66,6 @@ public class BookParkingArea extends AppCompatActivity {
     public String AreaName;
     String name,userID;
     int totalSlots,occupiedSlots,availableSlots,amount2,amount3,amount4;
-    Boolean endTimeFlag,startTimeFlag;
     public List<SlotNoInfo> slotNos = new ArrayList<>();
     DatabaseReference reference;
     BasicUtils utils=new BasicUtils();
@@ -271,8 +270,6 @@ public class BookParkingArea extends AppCompatActivity {
         return 0;
     }
     private void attachListeners() {
-        updateUI();
-
         CalcAmt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -389,14 +386,6 @@ public class BookParkingArea extends AppCompatActivity {
         });
 
     }
-
-    private void updateUI() {
-        if(endTimeFlag && startTimeFlag){
-            CalcAmt.setVisibility(View.VISIBLE);
-            bookBtn.setVisibility(View.VISIBLE);
-        }
-    }
-
     private void showEndDatePicker(final TextView button) {
         DatePickerDialog.OnDateSetListener dateSetListener=new DatePickerDialog.OnDateSetListener() {
             @Override
@@ -446,7 +435,6 @@ public class BookParkingArea extends AppCompatActivity {
         TimePickerDialog.OnTimeSetListener timeSetListener= new TimePickerDialog.OnTimeSetListener() {
             @Override
             public void onTimeSet(TimePicker timePicker, int hour, int minute) {
-                endTimeFlag=true;
                 calendar.set(Calendar.HOUR_OF_DAY,hour);
                 calendar.set(Calendar.MINUTE,minute);
                 calendar.set(Calendar.SECOND, 0);
@@ -455,7 +443,6 @@ public class BookParkingArea extends AppCompatActivity {
                 if(bookingSlot.endTime.after(bookingSlot.startTime)){
                     button.setText(simpleDateFormat.format(calendar.getTime()));
                     bookingSlot.endTime = bookingSlot.checkoutTime = calendar.getTime();
-
                     //  calcRefreshAmount();
                 }else{
                     bookingSlot.endTime = bookingSlot.checkoutTime = bookingSlot.startTime;
@@ -471,7 +458,6 @@ public class BookParkingArea extends AppCompatActivity {
         TimePickerDialog.OnTimeSetListener timeSetListener= new TimePickerDialog.OnTimeSetListener() {
             @Override
             public void onTimeSet(TimePicker timePicker, int hour, int minute) {
-                startTimeFlag=true;
                 calendar.set(Calendar.HOUR_OF_DAY,hour);
                 calendar.set(Calendar.MINUTE,minute);
                 calendar.set(Calendar.SECOND, 0);
