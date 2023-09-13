@@ -40,7 +40,6 @@ public class BookingDetails extends AppCompatActivity implements View.OnClickLis
     TextView placeText, wheelerText, amountText, checkoutDateText, checkoutTimeText, endDateText, endTimeText, startDateText, startTimeText, numberPlateSpinner;
     FloatingActionButton checkoutBtn, payBtn;
 
-
     BookedSlots bookingSlot;
     UserDetails userObj;
     NotificationHelper mNotificationHelper;

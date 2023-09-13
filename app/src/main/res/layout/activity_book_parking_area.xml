@@ -27,8 +27,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/spacing_smlarge"
-            android:clickable="true"
+            android:clickable="false"
             android:tint="@android:color/white"
+            android:visibility="gone"
             app:fabSize="normal"
             app:layout_anchor="@id/nested_scroll_view"
             app:layout_anchorGravity="top|right|end"
@@ -429,6 +430,7 @@
                         android:layout_weight="1"
                         android:background="#7A6565"
                         android:text="Generate Amount"
+                        android:visibility="gone"
                         app:backgroundTint="#673AB7" />
 
                     <View

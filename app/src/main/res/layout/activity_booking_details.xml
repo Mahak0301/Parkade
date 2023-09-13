@@ -607,12 +607,12 @@
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/checkoutBtn"
-            android:visibility="gone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/spacing_smlarge"
-            android:clickable="true"
+            android:clickable="false"
             android:tint="@android:color/white"
+            android:visibility="gone"
             app:fabSize="normal"
             app:layout_anchor="@id/nested_scroll_view"
             app:layout_anchorGravity="top|right|end"
@@ -621,12 +621,12 @@
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/payBtn"
-            android:visibility="gone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/spacing_smlarge"
             android:clickable="true"
             android:tint="@android:color/white"
+            android:visibility="gone"
             app:fabSize="normal"
             app:layout_anchor="@id/nested_scroll_view"
             app:layout_anchorGravity="top|right|end"
